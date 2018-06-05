@@ -57,19 +57,19 @@ void toMorse(char *str)
         byte index = str[i] >= 48 && str[i] <= 57 ? str[i] - 22 : str[i] >= 65 && str[i] <= 90 ? str[i] - 65 : str[i] >= 97 && str[i] <= 122 ? str[i] - 97 : 255;
         if (index != 255)
         {
-            for (byte j = 0; i < 5; j++)
+            for (byte j = 0; j < 5; j++)
             {
                 if (table[index][j] == '.')
                 {
-                    PORTB |= 0x16; // turn on the led.
+                    PORTB |= 0x20; // turn on the led.
                     delay(dotPause);
-                    PORTB &= 0xEF; // turn off the led.
+                    PORTB &= 0xDF; // turn off the led.
                 }
                 else if (table[index][j] == '-')
                 {
-                    PORTB |= 0x16;
+                    PORTB |= 0x20;
                     delay(linePause);
-                    PORTB &= 0xEF;
+                    PORTB &= 0xDF;
                 }
                 delay(betweenPause);
             }
@@ -80,7 +80,7 @@ void toMorse(char *str)
 
 void setup()
 {
-    DDRB |= 0x16;
+    DDRB |= 0x20;
     toMorse("SOS");
 }
 
